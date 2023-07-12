@@ -1,0 +1,11 @@
+|===
+|Path|Type|Description|Optional|Constraint
+
+{{#fields}}
+|{{path}}
+|{{type}}
+|{{description}}
+|{{#optional}}Y{{/optional}}            {{!optional 이 참이면 Y}}
+|{{#constraint}} {{.}} {{/constraint}}  {{!constraint 가 존재할 때만 속성 추가}}
+{{/fields}}
+|===

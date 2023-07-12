@@ -1,0 +1,17 @@
+
+spring:
+  datasource:
+    url: jdbc:h2:tcp://localhost/~/myblog
+    username: sa
+    password:
+    driver-class-name: org.h2.Driver
+
+  data:
+    web:
+      pageable:
+        one-indexed-parameters: true #1부터 페이지 시작 한다는 의미 ( 웹 요청으로 넘어 왔을때 보정 )
+        default-page-size: 5
+
+  jpa:
+    hibernate:
+      ddl-auto: create
