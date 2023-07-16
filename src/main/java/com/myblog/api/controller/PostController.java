@@ -1,5 +1,6 @@
 package com.myblog.api.controller;
 
+import com.myblog.api.config.data.UserSession;
 import com.myblog.api.domain.Post;
 import com.myblog.api.exception.InvalidRequest;
 import com.myblog.api.request.PostCreate;
@@ -13,6 +14,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.util.List;
 
@@ -23,10 +25,30 @@ import java.util.List;
 public class PostController {
     private final PostService postService;
 
+    @GetMapping("/foo")
+    public String foo(UserSession userSession) {
+        log.info(">>>{}", userSession.name);
+        return userSession.name;
+    }
+
+    @GetMapping("/bar")
+    public String bar() {
+        return "인증이 필요없는 페이지";
+    }
+
+    @GetMapping("/bar2")
+    public String bar2(UserSession userSession) {
+        return "인증이 필요한 페이지";
+    }
+
     @PostMapping("/posts")
-    public void post(@RequestBody @Valid PostCreate request) {
-        request.validate();
-        postService.write(request);
+    public void post(
+            @RequestBody @Valid PostCreate request,
+            @RequestHeader String authorization) {
+        if (authorization.equals("forest")) {
+            request.validate();
+            postService.write(request);
+        }
     }
 
 
@@ -58,8 +80,13 @@ public class PostController {
      * title, content 를 PostEdit으로 받는다.
      */
     @PatchMapping("/posts/{postId}")
-    public void edit(@PathVariable Long postId, @RequestBody @Valid PostEdit request) {
-        postService.edit(postId, request);
+    public void edit(
+            @PathVariable Long postId,
+            @RequestBody @Valid PostEdit request,
+            @RequestHeader String authorization) {
+        if ( authorization.equals("forest")) {
+            postService.edit(postId, request);
+        }
     }
 
     /**

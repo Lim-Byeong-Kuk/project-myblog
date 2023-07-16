@@ -43,7 +43,7 @@ public class PostControllerTest {
 
 
     @Test
-    @DisplayName("/posts 요청시 title값은 필수이다.")
+    @DisplayName("글작성 요청시 title값은 필수이다.")
     public void testValidation() throws Exception {
         //given
         PostCreate request = PostCreate.builder()
@@ -87,7 +87,7 @@ public class PostControllerTest {
     }
 
     @Test
-    @DisplayName("/posts 요청시 DB에 값이 저장된다.")
+    @DisplayName("글 작성 요청시 DB에 값이 저장된다.")
     public void testPost() throws Exception {
         //given
         PostCreate request = PostCreate.builder()
@@ -99,6 +99,7 @@ public class PostControllerTest {
 
         // when
         mockMvc.perform(MockMvcRequestBuilders.post("/posts")
+                        .header("authorization", "forest")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(json)
                 )
