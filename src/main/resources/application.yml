@@ -13,5 +13,10 @@ spring:
         default-page-size: 5
 
   jpa:
+    defer-datasource-initialization: true
     hibernate:
       ddl-auto: create
+
+  sql:
+    init:
+      mode: always

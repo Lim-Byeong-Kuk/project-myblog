@@ -1,8 +1,6 @@
 package com.myblog.api.controller;
 
 import com.myblog.api.config.data.UserSession;
-import com.myblog.api.domain.Post;
-import com.myblog.api.exception.InvalidRequest;
 import com.myblog.api.request.PostCreate;
 import com.myblog.api.request.PostEdit;
 import com.myblog.api.request.PostSearch;
@@ -10,11 +8,8 @@ import com.myblog.api.response.PostResponse;
 import com.myblog.api.service.PostService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.web.PageableDefault;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.util.List;
 
@@ -26,9 +21,9 @@ public class PostController {
     private final PostService postService;
 
     @GetMapping("/foo")
-    public String foo(UserSession userSession) {
-        log.info(">>>{}", userSession.name);
-        return userSession.name;
+    public Long foo(UserSession userSession) {
+        log.info(">>>{}", userSession.id);
+        return userSession.id;
     }
 
     @GetMapping("/bar")
