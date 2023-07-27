@@ -1,8 +1,6 @@
 package com.myblog.api.controller;
 
-import com.myblog.api.exception.InvalidRequest;
 import com.myblog.api.exception.MyblogException;
-import com.myblog.api.exception.PostNotFound;
 import com.myblog.api.response.ErrorResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -38,10 +36,6 @@ public class ExceptionController {
                 .message("잘못된 요청입니다.")
                 .validation(validation)
                 .build();
-
-
-
-
 
         return response;
     }
