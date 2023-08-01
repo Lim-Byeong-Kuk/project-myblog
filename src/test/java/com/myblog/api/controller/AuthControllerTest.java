@@ -174,4 +174,19 @@ class AuthControllerTest {
                 .andExpect(MockMvcResultMatchers.status().isUnauthorized())
                 .andDo(MockMvcResultHandlers.print());
     }
+
+//    @Test
+//    @DisplayName("로그인 후 생성된 토큰에 담긴 정보 확인")
+//    public void checkTokenAfterLogin() {
+//        //given
+//        User user = User.builder()
+//                .name("forest")
+//                .email("abc@gmail.com")
+//                .password("1234")
+//                .build();
+//        Session session = user.addSession();
+//        userRepository.save(user);
+//    }
+
+
 }

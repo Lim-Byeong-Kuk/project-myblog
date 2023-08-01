@@ -11,6 +11,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.Date;
 import java.util.List;
 
 
@@ -21,14 +22,21 @@ public class PostController {
     private final PostService postService;
 
     @GetMapping("/foo")
-    public Long foo(UserSession userSession) {
+    public UserSession foo(UserSession userSession) {
         log.info(">>>{}", userSession.id);
-        return userSession.id;
+        log.info(">>>{}", userSession.issuedAt);
+        log.info(">>>{}", userSession.expiration);
+        return userSession;
     }
 
+    /**
+     * 인증이 필요없는 페이지
+     */
     @GetMapping("/bar")
-    public String bar() {
-        return "인증이 필요없는 페이지";
+    public Date bar() {
+        Date now = new Date();
+        log.info("Date now ={}",now);
+        return now;
     }
 
     @GetMapping("/bar2")
