@@ -2,6 +2,7 @@ package com.myblog.api.controller;
 
 import com.myblog.api.config.AppConfig;
 import com.myblog.api.request.Login;
+import com.myblog.api.request.Signup;
 import com.myblog.api.response.SessionResponse;
 import com.myblog.api.service.AuthService;
 import io.jsonwebtoken.Jwts;
@@ -44,5 +45,11 @@ public class AuthController {
                 .compact();
 
         return new SessionResponse(jws);
+    }
+
+    @PostMapping("/auth/signup")
+    public void signup(@RequestBody Signup signup) {
+        // dto 로 변환 생략함
+        authService.signup(signup);
     }
 }

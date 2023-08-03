@@ -17,9 +17,9 @@ spring:
     hibernate:
       ddl-auto: create
 
-  sql:
-    init:
-      mode: always
+#  sql:
+#    init:
+#      mode: always
 
 myblog:
   jwt-key: "+6XfrftkpXTDECSTKx+PDE+ajIf/Brei7V2h9y479ME="

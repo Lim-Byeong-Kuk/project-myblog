@@ -6,6 +6,7 @@ import com.myblog.api.domain.User;
 import com.myblog.api.repository.SessionRepository;
 import com.myblog.api.repository.UserRepository;
 import com.myblog.api.request.Login;
+import com.myblog.api.request.Signup;
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -175,18 +176,23 @@ class AuthControllerTest {
                 .andDo(MockMvcResultHandlers.print());
     }
 
-//    @Test
-//    @DisplayName("로그인 후 생성된 토큰에 담긴 정보 확인")
-//    public void checkTokenAfterLogin() {
-//        //given
-//        User user = User.builder()
-//                .name("forest")
-//                .email("abc@gmail.com")
-//                .password("1234")
-//                .build();
-//        Session session = user.addSession();
-//        userRepository.save(user);
-//    }
+    @Test
+    @DisplayName("회원가입")
+    public void signup() throws Exception {
 
+        //given
+        Signup signup = Signup.builder()
+                .email("abc@gmail.com")
+                .password("1234")
+                .name("forest")
+                .build();
+
+        // expected
+        mockMvc.perform(MockMvcRequestBuilders.post("/auth/signup")
+                        .content(objectMapper.writeValueAsString(signup))
+                        .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andDo(MockMvcResultHandlers.print());
+    }
 
 }
